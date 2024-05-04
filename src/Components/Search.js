@@ -7,7 +7,7 @@ const Search = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
-       navigate('/user/:${userName}')
+       navigate(`/user/${userName}`)
     }
   return (
     <div

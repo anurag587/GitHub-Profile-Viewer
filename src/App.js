@@ -8,7 +8,7 @@ function App() {
       <BrowserRouter>
       <Routes>
       <Route exact path="/" element = {<Search/>}/>
-      <Route exact path="/user/:usename" element = {<UserInfo/>}/>
+      <Route exact path="/user/:username" element = {<UserInfo/>}/>
       </Routes>
       </BrowserRouter>
     </div>
