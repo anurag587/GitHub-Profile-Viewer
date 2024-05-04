@@ -1,8 +1,14 @@
 import { TextInput, Button } from "flowbite-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
     const[userName,setUserName] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = async () => {
+       navigate('/user/:${userName}')
+    }
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center"
@@ -31,6 +37,7 @@ const Search = () => {
               />
               <Button
                 gradientDuoTone="purpleToPink"
+                onClick={handleSubmit}
                 className="ml-2 px-4 py-2 rounded-md shadow-md text-white bg-purple-500 hover:bg-purple-600 focus:outline-none focus:ring focus:border-purple-300"
               >
                 View
