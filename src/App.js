@@ -4,12 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="bg-gradient-to-r from-purple-500 to-pink-500">
+    <div className="bg-slate-900">
       <BrowserRouter>
-      <Routes>
-      <Route exact path="/" element = {<Search/>}/>
-      <Route exact path="/user/:username" element = {<UserInfo/>}/>
-      </Routes>
+        <Routes>
+          <Route exact path="/" element={<Search />} />
+          <Route exact path="/user/:username" element={<UserInfo />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
