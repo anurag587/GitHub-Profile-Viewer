@@ -1,6 +1,6 @@
 import React from "react";
 
-export const FollowersCard = ({ login, avatar_url }) => {
+export const FollowingCard = ({ login, avatar_url }) => {
   return (
     <div className="bg-slate-300 flex flex-col items-center p-6 rounded-lg shadow-md">
       <img

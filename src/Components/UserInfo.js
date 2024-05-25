@@ -9,19 +9,21 @@ const userRepos = mockData.userReposData;
 const UserInfo = () => {
   const [data, setData] = useState([]);
   const [dataSet, setDataSet] = useState([]);
-  const [sortType, setSortType] = useState('');
+  const [sortType, setSortType] = useState("");
   const navigate = useNavigate();
-  const sortArray = (type) =>{
+  const sortArray = (type) => {
     const types = {
       size: "size",
       stars: "stargazers_count",
-      forks: "forks_count"
-    }
+      forks: "forks_count",
+    };
     const sortProperty = types[type];
-    const sorted = [...userRepos].sort((a,b)=>b[sortProperty] - a[sortProperty])
-    console.log("array sorted",sorted)
+    const sorted = [...userRepos].sort(
+      (a, b) => b[sortProperty] - a[sortProperty]
+    );
+    console.log("array sorted", sorted);
     setDataSet(sorted);
-  }
+  };
 
   const date = userData.created_at;
   const created = new Date(date);
@@ -40,21 +42,19 @@ const UserInfo = () => {
   //    fetchUserInfo();
   // },[username])
 
-  const handleRpos =()=>{
-    navigate(`/user/${username}/repositories`)
-  }
-  const handleFollowers=()=>{
-    navigate(`/user/${username}/followers`)
-  }
-  const handleFollowings=()=>{
-    navigate(`/user/${username}/followings`)
-  }
-  const handleGists=()=>{
-    navigate(`/user/${username}/gists`)
-  }
-  useEffect(()=>{
+  const handleRpos = () => {
+    navigate(`/user/${username}/repositories`);
+  };
+  const handleFollowers = () => {
+    navigate(`/user/${username}/followers`);
+  };
+  const handleFollowings = () => {
+    navigate(`/user/${username}/followings`);
+  };
+
+  useEffect(() => {
     sortArray(sortType);
-  },[sortType])
+  }, [sortType]);
   useEffect(() => {
     console.log("data updated:", data); // Log data whenever it changes
     setData(userRepos); // Set data only once when the component mounts
@@ -122,26 +122,35 @@ const UserInfo = () => {
           </span>
         </div>
         <div className="flex flex-row justify-center gap-5 mt-10 text-white ">
-          <div className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500 hover:bg-blue-400 transition duration-300 ease-in-out" onClick={handleRpos}>
+          <div
+            className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500 hover:bg-blue-400 transition duration-300 ease-in-out"
+            onClick={handleRpos}
+          >
             <span className="flex items-center justify-center  h-10 w-10  text-2xl ">
               {userData?.public_repos}
             </span>
             <h3>Repositories</h3>
             {/* </Link> */}
           </div>
-          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out " onClick={handleFollowers}>
+          <div
+            className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out "
+            onClick={handleFollowers}
+          >
             <span className="flex items-center justify-center  h-10 w-10  text-2xl ">
               {userData?.followers}
             </span>
             <h3>Followers</h3>
           </div>
-          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out " onClick={handleFollowings}>
+          <div
+            className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out "
+            onClick={handleFollowings}
+          >
             <span className="flex items-center justify-center  h-10 w-10 text-2xl">
               {userData?.following}
             </span>
             <h3>Following</h3>
           </div>
-          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out " onClick={handleGists}>
+          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out ">
             <span className="flex items-center justify-center  h-10 w-10 text-2xl">
               {userData?.public_gists}
             </span>
@@ -149,15 +158,20 @@ const UserInfo = () => {
           </div>
         </div>
       </div>
-      <div>
-        <span className=" flex flex-row ">
-          <h1 className="mb-5 text-white">Top Repos by</h1>
-          <select className="p-2 ml-2" onChange={(e) => setSortType(e.target.value)}>
-            <option value="size">size</option>
-            <option value="stars">stars</option>
-            <option value="forks">forks</option>
+      <div className="mb-5">
+        <div className="flex items-center justify-center p-4 bg-gray-800 rounded-lg shadow-md">
+          <h1 className="text-lg font-semibold text-white mr-2">
+            Top Repos by
+          </h1>
+          <select
+            className="p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setSortType(e.target.value)}
+          >
+            <option value="size">Size</option>
+            <option value="stars">Stars</option>
+            <option value="forks">Forks</option>
           </select>
-        </span>
+        </div>
       </div>
       <div className="flex flex-wrap gap-2 content-center justify-center  bg-slate-200 w-full h-full">
         {dataSet.map((item) => (
