@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import mockData from "../mock.json";
 import { RepoCard } from "./RepoCard";
 
@@ -11,7 +10,7 @@ const UserInfo = () => {
   const [data, setData] = useState([]);
   const [dataSet, setDataSet] = useState([]);
   const [sortType, setSortType] = useState('');
-
+  const navigate = useNavigate();
   const sortArray = (type) =>{
     const types = {
       size: "size",
@@ -41,6 +40,18 @@ const UserInfo = () => {
   //    fetchUserInfo();
   // },[username])
 
+  const handleRpos =()=>{
+    navigate(`/user/${username}/repositories`)
+  }
+  const handleFollowers=()=>{
+    navigate(`/user/${username}/followers`)
+  }
+  const handleFollowings=()=>{
+    navigate(`/user/${username}/followings`)
+  }
+  const handleGists=()=>{
+    navigate(`/user/${username}/gists`)
+  }
   useEffect(()=>{
     sortArray(sortType);
   },[sortType])
@@ -111,27 +122,26 @@ const UserInfo = () => {
           </span>
         </div>
         <div className="flex flex-row justify-center gap-5 mt-10 text-white ">
-          <div className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500">
-            {/* <Link to={`/user/${username}/repository`}> */}
+          <div className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500 hover:bg-blue-400 transition duration-300 ease-in-out" onClick={handleRpos}>
             <span className="flex items-center justify-center  h-10 w-10  text-2xl ">
               {userData?.public_repos}
             </span>
             <h3>Repositories</h3>
             {/* </Link> */}
           </div>
-          <div className="flex flex-col items-center bg-zinc-500 p-4 ">
+          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out " onClick={handleFollowers}>
             <span className="flex items-center justify-center  h-10 w-10  text-2xl ">
               {userData?.followers}
             </span>
             <h3>Followers</h3>
           </div>
-          <div className="flex flex-col items-center bg-zinc-500 p-4 ">
+          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out " onClick={handleFollowings}>
             <span className="flex items-center justify-center  h-10 w-10 text-2xl">
               {userData?.following}
             </span>
             <h3>Following</h3>
           </div>
-          <div className="flex flex-col items-center bg-zinc-500 p-4 ">
+          <div className="flex flex-col items-center bg-zinc-500 p-4 hover:bg-blue-400 transition duration-300 ease-in-out " onClick={handleGists}>
             <span className="flex items-center justify-center  h-10 w-10 text-2xl">
               {userData?.public_gists}
             </span>

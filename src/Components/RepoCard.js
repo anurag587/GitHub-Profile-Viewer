@@ -12,7 +12,6 @@ export const RepoCard = ({
   stargazers_count,
   size,
 }) => {
-  // console.log(mockData.userReposData)
   return (
     <div className="mt-5 mb-5">
       <div className="h-56 w-96 bg-white content-center ml-2 mr-2 p-4 rounded-3xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 border-solid border-2 border-neutral-950 ">
