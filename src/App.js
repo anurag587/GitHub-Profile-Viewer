@@ -17,7 +17,7 @@ function App() {
           <Route exact path = "/user/:username/followers" element={<Followers/>}/>
           <Route exact path = "/user/:username/followings" element={<Following/>}/>
           <Route exact path = "/user/:username/gists" element={<Gists/>}/>
-
+          
         </Routes>
       </BrowserRouter>
     </div>

@@ -18,9 +18,9 @@ const UserInfo = () => {
       forks: "forks_count",
     };
     const sortProperty = types[type];
-    const sorted = [...userRepos].sort(
-      (a, b) => b[sortProperty] - a[sortProperty]
-    );
+    const sorted = [...userRepos]
+      .sort((a, b) => b[sortProperty] - a[sortProperty])
+      .slice(0, 9);
     console.log("array sorted", sorted);
     setDataSet(sorted);
   };
@@ -62,7 +62,7 @@ const UserInfo = () => {
 
   return (
     <>
-      <div className=" rgb(246, 248, 250) flex flex-col items-center justify-center p-10">
+      <div className=" rgb(246, 248, 250) flex flex-col items-center justify-center p-10 ">
         <img
           className="h-28 w-28 rounded-full m-3 border-4 border-violet-800 "
           src={userData?.avatar_url}
@@ -121,11 +121,8 @@ const UserInfo = () => {
             })}
           </span>
         </div>
-        <div className="flex flex-row justify-center gap-5 mt-10 text-white ">
-          <div
-            className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500 hover:bg-blue-400 transition duration-300 ease-in-out"
-            onClick={handleRpos}
-          >
+        <div className="flex flex-row justify-center gap-5 mt-10 text-white cursor-pointer ">
+          <div className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500 hover:bg-blue-400 transition duration-300 ease-in-out">
             <span className="flex items-center justify-center  h-10 w-10  text-2xl ">
               {userData?.public_repos}
             </span>
@@ -159,10 +156,8 @@ const UserInfo = () => {
         </div>
       </div>
       <div className="mb-5">
-        <div className="flex items-center justify-center p-4 bg-gray-800 rounded-lg shadow-md">
-          <h1 className="text-lg font-semibold text-white mr-2">
-            Top Repos by
-          </h1>
+        <div className="flex items-center justify-center p-4  rounded-lg shadow-md">
+          <h1 className="text-lg font-semibold text-white mr-2">Sort by</h1>
           <select
             className="p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={(e) => setSortType(e.target.value)}
@@ -173,7 +168,7 @@ const UserInfo = () => {
           </select>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 content-center justify-center  bg-slate-200 w-full h-full">
+      <div className="flex flex-wrap gap-2 content-center justify-center relative z-10 bg-slate-200 w-full h-full">
         {dataSet.map((item) => (
           <RepoCard {...item} key={item.id} />
         ))}
