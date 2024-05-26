@@ -10,6 +10,7 @@ const UserInfo = () => {
   const [data, setData] = useState([]);
   const [dataSet, setDataSet] = useState([]);
   const [sortType, setSortType] = useState("");
+  const [number,setNumber] = useState('')
   const navigate = useNavigate();
   const sortArray = (type) => {
     const types = {
@@ -25,6 +26,16 @@ const UserInfo = () => {
     setDataSet(sorted);
   };
 
+  const AccToNumber=(type)=>{
+    const types = {
+      three:[...userRepos].slice(0,3),
+      six:[...userRepos].slice(0,6),
+      nine:[...userRepos].slice(0,9),
+      all:[...userRepos],
+    }
+    const repository = types[type]
+    setDataSet(repository)
+  }
   const date = userData.created_at;
   const created = new Date(date);
   // const [userData, setUserData] = useState(null);
@@ -59,6 +70,9 @@ const UserInfo = () => {
     console.log("data updated:", data); // Log data whenever it changes
     setData(userRepos); // Set data only once when the component mounts
   }, []);
+  useEffect(() => {
+    AccToNumber(number);
+  }, [number]);
 
   return (
     <>
@@ -155,7 +169,7 @@ const UserInfo = () => {
           </div>
         </div>
       </div>
-      <div className="mb-5">
+      <div className="mb-5 flex flex-row content-center justify-center">
         <div className="flex items-center justify-center p-4  rounded-lg shadow-md">
           <h1 className="text-lg font-semibold text-white mr-2">Sort by</h1>
           <select
@@ -165,6 +179,18 @@ const UserInfo = () => {
             <option value="size">Size</option>
             <option value="stars">Stars</option>
             <option value="forks">Forks</option>
+          </select>
+        </div>
+        <div className="flex items-center justify-center p-4  rounded-lg shadow-md">
+          <h1 className="text-lg font-semibold text-white mr-2">Top Repos </h1>
+          <select
+            className="p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setNumber(e.target.value)}
+          >
+            <option value="three">3</option>
+            <option value="six">6</option>
+            <option value="nine">9</option>
+            <option value="all">All</option>
           </select>
         </div>
       </div>
