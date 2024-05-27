@@ -1,57 +1,72 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import mockData from "../mock.json";
 import { RepoCard } from "./RepoCard";
 
-const userData = mockData.userData;
-const userRepos = mockData.userReposData;
 
 const UserInfo = () => {
-  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [userReposData, setUserReposData] = useState([]);
   const [dataSet, setDataSet] = useState([]);
   const [sortType, setSortType] = useState("");
-  const [number,setNumber] = useState('')
+  const [number, setNumber] = useState("");
   const navigate = useNavigate();
   const sortArray = (type) => {
-    const types = {
-      size: "size",
-      stars: "stargazers_count",
-      forks: "forks_count",
-    };
-    const sortProperty = types[type];
-    const sorted = [...userRepos]
-      .sort((a, b) => b[sortProperty] - a[sortProperty])
-      .slice(0, 9);
-    console.log("array sorted", sorted);
-    setDataSet(sorted);
+    if (userData) {
+      const types = {
+        size: "size",
+        stars: "stargazers_count",
+        forks: "forks_count",
+      };
+      const sortProperty = types[type];
+      const sorted = [...userReposData]
+        .sort((a, b) => b[sortProperty] - a[sortProperty])
+        .slice(0, 9);
+      //  console.log("array sorted", sorted);
+      setDataSet(sorted);
+    }
   };
 
-  const AccToNumber=(type)=>{
-    const types = {
-      three:[...userRepos].slice(0,3),
-      six:[...userRepos].slice(0,6),
-      nine:[...userRepos].slice(0,9),
-      all:[...userRepos],
+  const AccToNumber = (type) => {
+    if (userData) {
+      const types = {
+        three: [...userReposData].slice(0, 3),
+        six: [...userReposData].slice(0, 6),
+        nine: [...userReposData].slice(0, 9),
+        all: [...userReposData],
+      };
+      const repository = types[type];
+      setDataSet(repository);
     }
-    const repository = types[type]
-    setDataSet(repository)
-  }
-  const date = userData.created_at;
-  const created = new Date(date);
-  // const [userData, setUserData] = useState(null);
+  };
   const params = useParams();
   const { username } = params;
 
-  // console.log(username)
-  // const fetchUserInfo = async ()=>{
-  // const res = await fetch(`https://api.github.com/users/${username}`)
-  // const data = await res.json();
-  //setUserData(data);
-  // console.log(userData);
-  //  }
-  //useEffect (()=>{
-  //    fetchUserInfo();
-  // },[username])
+   console.log(username)
+  const fetchUserInfo = async () => {
+    try {
+      const res = await fetch(`https://api.github.com/users/${username}`);
+      const data = await res.json();
+      setUserData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+ // console.log(userData);
+
+  const fetchUserRepos = async () => {
+    try {
+      const res = await fetch(`https://api.github.com/users/${username}/repos`);
+      const data = await res.json();
+      setUserReposData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const date = userData?.created_at;
+  const created = new Date(date);
+  useEffect(() => {
+    fetchUserInfo();
+  }, [username]);
 
   const handleRpos = () => {
     navigate(`/user/${username}/repositories`);
@@ -62,14 +77,16 @@ const UserInfo = () => {
   const handleFollowings = () => {
     navigate(`/user/${username}/followings`);
   };
+  useEffect(() => {
+    fetchUserInfo();
+    fetchUserRepos();
+  }, [username]); // List `userData` as a dependency
 
   useEffect(() => {
     sortArray(sortType);
-  }, [sortType]);
-  useEffect(() => {
-    console.log("data updated:", data); // Log data whenever it changes
-    setData(userRepos); // Set data only once when the component mounts
-  }, []);
+  }, [sortType, userData]); // Include `userData` here
+
+  
   useEffect(() => {
     AccToNumber(number);
   }, [number]);
