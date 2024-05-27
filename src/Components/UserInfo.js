@@ -64,9 +64,7 @@ const UserInfo = () => {
   };
   const date = userData?.created_at;
   const created = new Date(date);
-  useEffect(() => {
-    fetchUserInfo();
-  }, [username]);
+  
 
   const handleRpos = () => {
     navigate(`/user/${username}/repositories`);
