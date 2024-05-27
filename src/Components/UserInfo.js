@@ -9,7 +9,11 @@ const UserInfo = () => {
   const [dataSet, setDataSet] = useState([]);
   const [sortType, setSortType] = useState("");
   const [number, setNumber] = useState("");
+  const params = useParams();
+  const { username } = params;
   const navigate = useNavigate();
+
+
   const sortArray = (type) => {
     if (userData) {
       const types = {
@@ -38,10 +42,8 @@ const UserInfo = () => {
       setDataSet(repository);
     }
   };
-  const params = useParams();
-  const { username } = params;
 
-   console.log(username)
+   //console.log(username)
   const fetchUserInfo = async () => {
     try {
       const res = await fetch(`https://api.github.com/users/${username}`);
@@ -51,6 +53,7 @@ const UserInfo = () => {
       console.error(error);
     }
   };
+  //console.log(dataSet)
  // console.log(userData);
 
   const fetchUserRepos = async () => {
@@ -66,9 +69,9 @@ const UserInfo = () => {
   const created = new Date(date);
   
 
-  const handleRpos = () => {
-    navigate(`/user/${username}/repositories`);
-  };
+  // const handleRpos = () => {
+  //   navigate(`/user/${username}/repositories`);
+  // };
   const handleFollowers = () => {
     navigate(`/user/${username}/followers`);
   };
@@ -78,6 +81,7 @@ const UserInfo = () => {
   useEffect(() => {
     fetchUserInfo();
     fetchUserRepos();
+    console.log("hello",dataSet)
   }, [username]); // List `userData` as a dependency
 
   useEffect(() => {
@@ -86,8 +90,10 @@ const UserInfo = () => {
 
   
   useEffect(() => {
-    AccToNumber(number);
-  }, [number]);
+    if (userReposData.length > 0) {
+      AccToNumber(number);
+    }
+  }, [userReposData, number]);
 
   return (
     <>
@@ -209,11 +215,13 @@ const UserInfo = () => {
           </select>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 content-center justify-center relative z-10 bg-slate-200 w-full h-full">
+      {dataSet.length > 0 && 
+        (<div className="flex flex-wrap gap-2 content-center justify-center relative z-10 bg-slate-200 w-full h-full">
         {dataSet.map((item) => (
           <RepoCard {...item} key={item.id} />
         ))}
       </div>
+)}
     </>
   );
 };

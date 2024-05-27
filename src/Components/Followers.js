@@ -31,6 +31,7 @@ export const Followers = () => {
   };
   useEffect(() => {
     fetchUserInfo();
+    fetchFollowers()
   }, [username]);
   return (
     <>

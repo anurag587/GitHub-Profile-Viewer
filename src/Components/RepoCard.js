@@ -1,9 +1,7 @@
 import React from "react";
-import mockData from "../mock.json";
 
-const userRepos = mockData.userReposData;
 
-console.log(userRepos);
+//console.log(userRepos);
 export const RepoCard = ({
   name,
   description,
