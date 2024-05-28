@@ -6,22 +6,12 @@ import { useParams } from "react-router-dom";
 //const following = followingData;
 export const Following = () => {
   const [followingUser, setFollowingUser] = useState([]);
-  const [userData, setUserData] = useState(null);
 
   const params = useParams();
   const { username } = params;
-  const fetchUserInfo = async () => {
-    try {
-      const res = await fetch(`https://api.github.com/users/${username}`);
-      const data = await res.json();
-      setUserData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const fetchFollowing = async () => {
     try {
-      const res = await fetch(userData?.following_url);
+      const res = await fetch(`https://api.github.com/users/${username}/following`);
       const data = await res.json();
       setFollowingUser(data);
       console.log("following", data);
@@ -30,7 +20,7 @@ export const Following = () => {
     }
   };
   useEffect(() => {
-    fetchUserInfo();
+    fetchFollowing();
   }, [username]);
   return (
     <>

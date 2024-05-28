@@ -62,7 +62,7 @@ const UserInfo = () => {
       console.error(error);
     }
   };
-  console.log("hello",dataSet)
+  // console.log("hello",dataSet)
   const date = userData?.created_at;
   const created = new Date(date);
   
