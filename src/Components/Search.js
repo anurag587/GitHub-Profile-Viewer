@@ -32,7 +32,7 @@ const Search = () => {
                 placeholder="Search GitHub Profile"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
-                className="w-full py-2 px-4 mb-2 md:mb-0 md:mr-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300 bg-gray-800 text-white"
+                className="w-full py-2 px-4 mb-2 md:mb-0 md:mr-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300 bg-gray-800 text-black"
               />
               <Button
                 gradientDuoTone="purpleToPink"
