@@ -25,9 +25,9 @@ export const Followers = () => {
   return (
     <>
       <div className="bg-gray-700 p-6">
-        <ul className="flex flex-wrap gap-5">
+        <ul className="flex flex-wrap gap-5 justify-center">
           {followerData.map((item) => (
-            <li key={item.id} className="list-none">
+            <li key={item.id} className="list-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
               <FollowersCard {...item} />
             </li>
           ))}

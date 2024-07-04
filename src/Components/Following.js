@@ -1,14 +1,13 @@
-import React, { useState,useEffect } from "react";
-import followingData from "../following.json";
+import React, { useState, useEffect } from "react";
 import { FollowingCard } from "./FollowingCard";
 import { useParams } from "react-router-dom";
 
-//const following = followingData;
 export const Following = () => {
   const [followingUser, setFollowingUser] = useState([]);
 
   const params = useParams();
   const { username } = params;
+
   const fetchFollowing = async () => {
     try {
       const res = await fetch(`https://api.github.com/users/${username}/following`);
@@ -19,18 +18,20 @@ export const Following = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchFollowing();
   }, [username]);
+
   return (
     <>
       <div className="bg-gray-700 p-6">
-        <ul className="flex flex-wrap gap-5">
-        {followingUser.map((item) => (
-          <li key={item.id}>
-          <FollowingCard {...item}  />
-          </li>
-        ))}
+        <ul className="flex flex-wrap gap-5 justify-center">
+          {followingUser.map((item) => (
+            <li key={item.id} className="list-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <FollowingCard {...item} />
+            </li>
+          ))}
         </ul>
       </div>
     </>
