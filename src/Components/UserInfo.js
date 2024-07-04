@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { RepoCard } from "./RepoCard";
 
-
 const UserInfo = () => {
   const [userData, setUserData] = useState(null);
   const [userReposData, setUserReposData] = useState([]);
@@ -12,7 +11,6 @@ const UserInfo = () => {
   const params = useParams();
   const { username } = params;
   const navigate = useNavigate();
-
 
   const sortArray = (type) => {
     if (userData) {
@@ -57,7 +55,7 @@ const UserInfo = () => {
       const res = await fetch(`https://api.github.com/users/${username}/repos`);
       const data = await res.json();
       setUserReposData(data);
-      setDataSet(data)
+      setDataSet(data);
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +63,7 @@ const UserInfo = () => {
   // console.log("hello",dataSet)
   const date = userData?.created_at;
   const created = new Date(date);
-  
+
   const handleFollowers = () => {
     navigate(`/user/${username}/followers`);
   };
@@ -82,10 +80,9 @@ const UserInfo = () => {
     sortArray(sortType);
   }, [sortType, userData]); // Include `userData` here
 
-  
   useEffect(() => {
-      AccToNumber(number);
-  }, [ number]);
+    AccToNumber(number);
+  }, [number]);
 
   return (
     <>
@@ -200,19 +197,18 @@ const UserInfo = () => {
             className="p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={(e) => setNumber(e.target.value)}
           >
-            <option value="three">3</option>
-            <option value="six">6</option>
-            <option value="nine">9</option>
-            <option value="all">All</option>
+            <option value="three">All</option>
+            <option value="six">3</option>
+            <option value="nine">6</option>
+            <option value="all">9</option>
           </select>
         </div>
       </div>
-        <div className="flex flex-wrap gap-2 content-center justify-center relative z-10 bg-slate-200 w-full h-full">
+      <div className="flex flex-wrap gap-2 content-center justify-center relative z-10 bg-slate-200 w-full h-full">
         {dataSet.map((item) => (
           <RepoCard {...item} key={item.id} />
         ))}
       </div>
-
     </>
   );
 };
