@@ -91,10 +91,10 @@ const UserInfo = () => {
           className="h-28 w-28 rounded-full m-3 border-4 border-violet-800 "
           src={userData?.avatar_url}
         />
-        <h1 className="text-3xl mt-5 text-white"> {userData?.name}</h1>
-        <p className="text-xl mt-5 text-white"> {userData?.bio}</p>
-        <div className="flex gap-4 mt-5  ">
-          <span className="flex text-white gap-1">
+        <h1 className="text-3xl mt-5 text-white text-center"> {userData?.name}</h1>
+        <p className="text-xl mt-5 text-white text-center"> {userData?.bio}</p>
+        <div className="flex gap-4 mt-5 justify-center ">
+          <span className="flex text-white gap-1 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -110,7 +110,7 @@ const UserInfo = () => {
             </svg>
             {userData?.company}
           </span>
-          <span className="flex text-white gap-1">
+          <span className="flex text-white gap-1 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -125,7 +125,7 @@ const UserInfo = () => {
             </svg>
             {userData?.location}
           </span>
-          <span className="flex text-white gap-1">
+          <span className="flex text-white gap-1 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -197,14 +197,14 @@ const UserInfo = () => {
             className="p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={(e) => setNumber(e.target.value)}
           >
-            <option value="three">All</option>
-            <option value="six">3</option>
-            <option value="nine">6</option>
-            <option value="all">9</option>
+            <option value="all">All</option>
+            <option value="three">3</option>
+            <option value="six">6</option>
+            <option value="nine">9</option>
           </select>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 content-center justify-center relative z-10 bg-slate-200 w-full h-full">
+      <div className="flex flex-wrap gap-2 content-center justify-center  bg-slate-200 w-full h-full">
         {dataSet.map((item) => (
           <RepoCard {...item} key={item.id} />
         ))}
