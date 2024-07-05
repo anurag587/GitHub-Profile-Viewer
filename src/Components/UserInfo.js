@@ -204,10 +204,14 @@ const UserInfo = () => {
           </select>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 content-center justify-center  bg-slate-200 w-full h-full">
+      <div className="flex flex-wrap gap-2 content-center justify-center bg-slate-200  ">
+      <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center ">
         {dataSet.map((item) => (
-          <RepoCard {...item} key={item.id} />
+          <li key={item.id} className="list-none sm:w-full flex gap-4">
+          <RepoCard {...item}  />
+          </li>
         ))}
+        </ul>
       </div>
     </>
   );

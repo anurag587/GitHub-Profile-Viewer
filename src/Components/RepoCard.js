@@ -14,7 +14,7 @@ export const RepoCard = ({
   };
 
   return (
-    <div className="mt-5 mb-1 cursor-pointer" onClick={handleRepo}>
+    <div className="mt-5 mb-1 cursor-pointer w-full p-2" onClick={handleRepo}>
       <div className="h-full w-full sm:w-80 md:w-96 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 border-solid border-2 border-neutral-200 flex flex-col">
         <div className="flex items-center p-4">
           <h1 className="ml-4 text-lg sm:text-xl font-semibold text-black truncate">
