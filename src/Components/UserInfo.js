@@ -86,14 +86,14 @@ const UserInfo = () => {
 
   return (
     <>
-      <div className=" rgb(246, 248, 250) flex flex-col items-center justify-center p-10 ">
+      <div className=" rgb(246, 248, 250) flex flex-col  items-center justify-center p-10 ">
         <img
           className="h-28 w-28 rounded-full m-3 border-4 border-violet-800 "
           src={userData?.avatar_url}
         />
         <h1 className="text-3xl mt-5 text-white text-center"> {userData?.name}</h1>
         <p className="text-xl mt-5 text-white text-center"> {userData?.bio}</p>
-        <div className="flex gap-4 mt-5 justify-center ">
+        <div className="gap-4 mt-5 justify-center flex ">
           <span className="flex text-white gap-1 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ const UserInfo = () => {
             })}
           </span>
         </div>
-        <div className="flex flex-row justify-center gap-5 mt-10 text-white cursor-pointer ">
+        <div className="flex flex-wrap justify-center gap-5 mt-10 text-white cursor-pointer ">
           <div className="flex flex-col items-center rgb(36, 41, 46) p-4 bg-zinc-500 hover:bg-blue-400 transition duration-300 ease-in-out">
             <span className="flex items-center justify-center  h-10 w-10  text-2xl ">
               {userData?.public_repos}
